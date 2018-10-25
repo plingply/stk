@@ -14,5 +14,8 @@
 body .yd-list-donetip {
   font-size: 14px;
   padding: 0;
-  height: 80px;
+  height: 100px;
+}
+body .doneTip {
+  line-height: 50px;
 }

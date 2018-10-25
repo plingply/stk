@@ -114,6 +114,20 @@ body {
 h2 {
   color: green;
 }
+.btn {
+  display: block;
+  width: 100%;
+  height: 50px;
+  border: none;
+  outline: none;
+  color: #fff;
+  background-image: url(../../static/img/btnbj.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.btn:active {
+  opacity: .7;
+}
 .titlestyle {
   font-size: 14px;
   color: #8B7F7F;

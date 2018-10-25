@@ -6,6 +6,9 @@ import editor from '../views/editor.vue'
 import add from '../views/add.vue'
 import preview from '../views/preview.vue'
 import share from '../views/fx.vue'
+import student from '../views/student.vue'
+import studentinfo from '../views/studentinfo.vue'
+import shuru from '../views/shuru.vue'
 
 var routes = [{
     path: '/',
@@ -34,6 +37,18 @@ var routes = [{
     path: '/Share/:id',
     name: 'share',
     component: share
+},{
+    path: '/Student/:id',
+    name: 'student',
+    component: student
+},{
+    path: '/StudentInfo/:mid/:id',
+    name: 'studentinfo',
+    component: studentinfo
+},{
+    path: '/Input/:mid',
+    name: 'input',
+    component: shuru
 }]
 
 export default routes

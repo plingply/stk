@@ -3,8 +3,8 @@ import tokenFun from '../token'
 import { Alert } from 'vue-ydui/dist/lib.rem/dialog';
 
 let Promise = require('es6-promise').Promise;
-let baseUrl = "http://local.xyb.com"
-// let baseUrl = "https://dev.imxyb.com"
+// let baseUrl = "http://local.xyb.com"
+let baseUrl = "https://dev.imxyb.com"
 const Axios = axios.create({
     baseURL: baseUrl,
     timeout: 60000,

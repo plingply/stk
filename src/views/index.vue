@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="el">
     <div class="tab">
       <span :class="{active:tabindex == 0}" @click="tabClick(0)">未发布</span>
       <span :class="{active:tabindex == 1}" @click="tabClick(1)">已发布</span>
@@ -40,15 +40,15 @@
             <router-link tag="span" :to="{name:'share',params:{id:item.id}}">
               <img src="static/img/fenxiang.png" alt="">
               分享</router-link>
-            <span>
+            <router-link tag="span" :to="{name:'student',params:{id:item.id}}">
               <img src="static/img/bmicon.png" alt="">
-              报名信息</span>
+              报名信息</router-link>
           </div>
           <!-- 已下线 -->
           <div class="bottom" v-if="tabindex == 2">
-            <span>
+            <router-link tag="span" :to="{name:'student',params:{id:item.id}}">
               <img src="static/img/bmicon.png" alt="">
-              报名信息</span>
+              报名信息</router-link>
           </div>
         </li>
       </ul>
@@ -62,7 +62,7 @@
       </svg>
     </yd-infinitescroll>
     <div class="bottombox">
-      <span>验证码核销</span>
+      <span @click="heyanshow = true">验证码核销</span>
       <router-link tag="span" :to="{name:'add'}">添加试听课</router-link>
     </div>
 
@@ -82,8 +82,20 @@
 
     <!-- 二维码 -->
     <yd-popup v-model="qrcodeshow" position="center" width="90%">
-      <div class="qrcode">
-        <img :src="qrcodeUrl" alt="">
+      <div class="qrcode" id="qrcode" ref="qrcode"></div>
+    </yd-popup>
+
+    <!-- 核验二维码 -->
+    <yd-popup v-model="heyanshow" position="center" width="90%">
+      <div class="heyanbox">
+        <div>
+          <img src="static/img/saoma.png" alt="">
+          <span>扫码</span>
+        </div>
+        <router-link tag="div" :to="{name:'input',params:{mid:user.id}}">
+          <img src="static/img/shuru.png" alt="">
+          <span>手动输入</span>
+        </router-link>
       </div>
     </yd-popup>
   </div>
@@ -96,11 +108,11 @@ export default {
       tabindex: 1,
       deleshow: false,
       page: 1,
-      limit: 2,
+      limit: 10,
       list: [],
       delid: "",
       qrcodeshow: false,
-      qrcodeUrl: ""
+      heyanshow: false
     };
   },
   computed: {
@@ -109,9 +121,18 @@ export default {
     }
   },
   methods: {
-    openQrcode(item){
-      this.qrcodeshow = true
-      this.qrcodeUrl = item.cover_image_url
+    openQrcode(item) {
+      this.qrcodeshow = true;
+      this.$refs.qrcode.innerHTML = "";
+      // 设置参数方式
+      var qrcode = new QRCode("qrcode", {
+        text: "http://www.baidu.com",
+        width: 200,
+        height: 200,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
     },
     linkinfo(id) {
       this.$router.push({ name: "info", params: { id } });
@@ -197,6 +218,31 @@ export default {
   height: 200px;
 }
 
+.heyanbox {
+  width: 200px;
+  height: 110px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  > div {
+    width: 80px;
+    img {
+      display: block;
+      width: 80px;
+      height: 80px;
+      margin-bottom: 10px;
+    }
+    span {
+      display: block;
+      text-align: center;
+      color: #fff;
+      font-size: 14px;
+      line-height: 20px;
+      height: 20px;
+    }
+  }
+}
+
 .tab {
   width: 100%;
   display: flex;
@@ -251,11 +297,11 @@ export default {
 
 .qrcode {
   display: block;
-  height: 200px;
+  height: 220px;
+  width: 220px;
+  margin: 0 auto;
   background-color: #fff;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
+  padding: 10px;
   img {
     display: block;
     margin: 0 auto;
