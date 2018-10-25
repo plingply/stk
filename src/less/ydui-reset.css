@@ -1,0 +1,18 @@
+.tabRest {
+  position: relative;
+}
+.tabRest .yd-tab-box {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.tabRest .yd-tab-panel {
+  padding-top: 1rem;
+}
+body .yd-list-donetip {
+  font-size: 14px;
+  padding: 0;
+  height: 80px;
+}
